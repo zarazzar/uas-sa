@@ -1,4 +1,4 @@
-export function solveTSP(waypoints, distanceMatrix) {
+export function bruteForce(waypoints, distanceMatrix) {
     const startTime = performance.now();
     let tours = getAllTours(waypoints);
     let minDistance = Infinity;

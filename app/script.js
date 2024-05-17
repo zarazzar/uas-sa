@@ -1,6 +1,6 @@
 import { Map } from "./map.js";
 import { heldKarp } from "./algorithms/heldKarpAlgorithm.js";
-import { solveTSP } from "./algorithms/bruteForceAlgorithm.js";
+import { bruteForce } from "./algorithms/bruteForceAlgorithm.js";
 
 const mapBoxAccessToken = "pk.eyJ1IjoiemFyYXp6YXJyIiwiYSI6ImNsd2F4NWozazA0NXgyaW1xbDd6NGlyOXcifQ.YM4YUsuFgHTFlp5ULDE4jQ";
 //tokenku pk.eyJ1IjoiemFyYXp6YXJyIiwiYSI6ImNsd2F4NWozazA0NXgyaW1xbDd6NGlyOXcifQ.YM4YUsuFgHTFlp5ULDE4jQ
@@ -22,7 +22,7 @@ document.getElementById("build-route-btn").addEventListener("click", async funct
   }
 
   if (waypoints.length >= 9 && selectorValue === "bruteForceAlgorithm") {
-    alert("Limit reached");
+    alert("TItik Melebihi batas untuk Menggunakan Brute Force");
     return;
   }
 
@@ -31,10 +31,7 @@ document.getElementById("build-route-btn").addEventListener("click", async funct
       result = heldKarp(distanceMatrix);
       break;
     case "bruteForceAlgorithm":
-      result = solveTSP(waypoints, distanceMatrix);
-      break;
-    case "antColonyAlgorithm":
-      result = solveTSPACO(waypoints, distanceMatrix);
+      result = bruteForce(waypoints, distanceMatrix);
       break;
   }
 
