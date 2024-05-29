@@ -1,6 +1,9 @@
 import { Map } from "./map.js";
 import { heldKarp } from "./algorithms/heldKarpAlgorithm.js";
 import { bruteForce } from "./algorithms/bruteForceAlgorithm.js";
+import { geneticAlgorithm } from "./algorithms/geneticAlgorithm.js";
+
+
 
 const mapBoxAccessToken = "pk.eyJ1IjoiemFyYXp6YXJyIiwiYSI6ImNsd2F4NWozazA0NXgyaW1xbDd6NGlyOXcifQ.YM4YUsuFgHTFlp5ULDE4jQ";
 //tokenku pk.eyJ1IjoiemFyYXp6YXJyIiwiYSI6ImNsd2F4NWozazA0NXgyaW1xbDd6NGlyOXcifQ.YM4YUsuFgHTFlp5ULDE4jQ
@@ -22,7 +25,7 @@ document.getElementById("build-route-btn").addEventListener("click", async funct
   }
 
   if (waypoints.length >= 9 && selectorValue === "bruteForceAlgorithm") {
-    alert("TItik Melebihi batas untuk Menggunakan Brute Force");
+    alert("Titik Melebihi batas untuk Menggunakan Brute Force");
     return;
   }
 
@@ -32,6 +35,9 @@ document.getElementById("build-route-btn").addEventListener("click", async funct
       break;
     case "bruteForceAlgorithm":
       result = bruteForce(waypoints, distanceMatrix);
+      break;
+    case "geneticAlgorithm":
+      result = geneticAlgorithm(distanceMatrix);
       break;
   }
 
@@ -47,7 +53,7 @@ function addSteps(steps) {
   for (let step of steps) {
     tripInstructions += `<li>${step.maneuver.instruction}</li>`;
   }
-  instructions.innerHTML = `<p><strong>Durasi Perjalanan: ${Math.floor(map.duration / 60)} menit 🏍️ </strong></p><ol>${tripInstructions}</ol>`;
+  instructions.innerHTML = `<p><strong>Durasi Perjalanan: ${Math.floor(map.duration / 60)} menit 🏍️ </strong></p><ul>${tripInstructions}</ul>`;
 }
 
 function updateUI() {
