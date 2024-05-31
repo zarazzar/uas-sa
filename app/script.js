@@ -69,13 +69,19 @@ function updateUI() {
   });
 }
 
-function onMarkerAdd(marker, index) {
+async function onMarkerAdd(marker, index) {
   const coordinates = marker.getLngLat();
   const waypointsList = document.getElementById("waypoints");
   const li = document.createElement("li");
   li.setAttribute("data-marker-index", index);
   li.textContent = `Titik ${String.fromCharCode(65 + index)} (${coordinates.lng.toFixed(3)}, ${coordinates.lat.toFixed(3)})`;
   waypointsList.appendChild(li);
+
+  // Fetch and log the distance matrix
+  if (map.markers.length > 1) { // Ensure there are at least two markers to create a distance matrix
+    const distanceMatrix = await map.getDistanceMatrix();
+    console.log("Distance Matrix:", distanceMatrix);
+  }
 }
 
 function onMarkerDragEnd(marker, index) {
@@ -84,6 +90,12 @@ function onMarkerDragEnd(marker, index) {
   const listItem = waypointsList.querySelector(`[data-marker-index="${index}"]`);
   if (listItem) {
     listItem.textContent = `Titik ${String.fromCharCode(65 + index)} (${coordinates.lng.toFixed(3)}, ${coordinates.lat.toFixed(3)})`;
+  }
+
+  if (map.markers.length > 1) {
+    map.getDistanceMatrix().then(distanceMatrix => {
+      console.log("Distance Matrix:", distanceMatrix);
+    });
   }
 }
 
