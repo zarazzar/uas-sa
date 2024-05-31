@@ -1,7 +1,6 @@
 export function geneticAlgorithm(distances, populationSize = 5, generations = 1000, mutationRate = 0.01) {
     const n = distances.length;
 
-    // Helper function to calculate the total distance of a tour
     function calculateDistance(tour) {
         let distance = 0;
         for (let i = 0; i < tour.length - 1; i++) {
@@ -11,7 +10,6 @@ export function geneticAlgorithm(distances, populationSize = 5, generations = 10
         return distance;
     }
 
-    // Initialize population with random tours
     function initializePopulation() {
         const population = [];
         for (let i = 0; i < populationSize; i++) {
@@ -21,12 +19,10 @@ export function geneticAlgorithm(distances, populationSize = 5, generations = 10
         return population;
     }
 
-    // Fitness function to evaluate a tour
     function fitness(tour) {
         return 1 / calculateDistance(tour);
     }
 
-    // Select parent using tournament selection
     function selectParent(population, fitnesses) {
         const tournamentSize = 5;
         const tournament = [];
@@ -37,7 +33,6 @@ export function geneticAlgorithm(distances, populationSize = 5, generations = 10
         return tournament.reduce((best, current) => fitness(current) > fitness(best) ? current : best);
     }
 
-    // Order crossover (OX)
     function crossover(parent1, parent2) {
         const start = Math.floor(Math.random() * n);
         const end = Math.floor(Math.random() * (n - start)) + start;
@@ -61,7 +56,6 @@ export function geneticAlgorithm(distances, populationSize = 5, generations = 10
         return child;
     }
 
-    // Mutate a tour by swapping two cities
     function mutate(tour) {
         for (let i = 0; i < n; i++) {
             if (Math.random() < mutationRate) {
@@ -71,13 +65,11 @@ export function geneticAlgorithm(distances, populationSize = 5, generations = 10
         }
     }
 
-    // Main genetic algorithm
     let population = initializePopulation();
 
     for (let gen = 0; gen < generations; gen++) {
         const newPopulation = [];
 
-        // Calculate fitness for the current population
         const fitnesses = population.map(tour => fitness(tour));
 
         for (let i = 0; i < populationSize; i++) {
@@ -91,7 +83,6 @@ export function geneticAlgorithm(distances, populationSize = 5, generations = 10
         population = newPopulation;
     }
 
-    // Find the best tour in the final population
     let bestTour = population[0];
     let bestDistance = calculateDistance(bestTour);
 
