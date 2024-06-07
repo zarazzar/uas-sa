@@ -24,10 +24,10 @@ document.getElementById("build-route-btn").addEventListener("click", async funct
     return;
   }
 
-  if (waypoints.length > 9 && selectorValue === "bruteForceAlgorithm") {
-    alert("Titik Melebihi batas untuk Menggunakan Brute Force");
-    return;
-  }
+  // if (waypoints.length > 9 && selectorValue === "bruteForceAlgorithm") {
+  //   alert("Titik Melebihi batas untuk Menggunakan Brute Force");
+  //   return;
+  // }
 
   switch (selectorValue) {
     case "heldKarpAlgorithm":
